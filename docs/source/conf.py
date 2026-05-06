@@ -2,9 +2,9 @@
 
 # -- Project information
 
-project = 'Lumache'
-copyright = '2021, Graziella'
-author = 'Graziella'
+project = 'PanGenie-Workshop'
+copyright = '2026, Jana Ebler'
+author = 'Jana Ebler'
 
 release = '0.1'
 version = '0.1.0'

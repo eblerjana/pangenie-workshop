@@ -1,7 +1,4 @@
 Workshop
 ===
 
-.. autosummary::
-   :toctree: generated
-
-   lumache
+PanGenie workshop.
