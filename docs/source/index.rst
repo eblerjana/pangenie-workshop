@@ -1,13 +1,10 @@
-Welcome to Lumache's documentation!
+PanGenie workshop
 ===================================
 
-**Lumache** (/lu'make/) is a Python library for cooks and food lovers
-that creates recipes mixing random ingredients.
-It pulls data from the `Open Food Facts database <https://world.openfoodfacts.org/>`_
-and offers a *simple* and *intuitive* API.
+Workshop expaining the basics of PanGenie with a small usecase.
 
-Check out the :doc:`usage` section for further information, including
-how to :ref:`installation` the project.
+Check out the :doc: `background` to read about the inputs PanGenie expects.
+Workshop questions are in :doc: `workshop`
 
 .. note::
 
@@ -18,5 +15,5 @@ Contents
 
 .. toctree::
 
-   usage
-   api
+   background
+   workshop

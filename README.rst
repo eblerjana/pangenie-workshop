@@ -1,9 +1,8 @@
-Template for the Read the Docs tutorial
+PanGenie Workshop
 =======================================
 
-This GitHub template includes fictional Python library
-with some basic Sphinx docs.
+This GitHub includes a workshop on PanGenie.
 
-Read the tutorial here:
+The workshop is available at:
 
-https://docs.readthedocs.io/en/stable/tutorial/
+https://pangenie-workshop.readthedocs.io/en/latest/
