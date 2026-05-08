@@ -11,12 +11,19 @@ Input data
 Reads
 =====
 
-PanGenie relies on k-mer count information and thus requires accurate sequencing reads. Therefore, we strongly recommend to use it with short reads only, in principle however, it is not restricted to short reads. PanGenie is alignment-free. Therefore, it expects unaligned reads in FASTA or FASTQ format. 
+PanGenie relies on k-mer count information and thus requires accurate sequencing reads. Therefore, we strongly recommend to use it with short reads only, in principle however, it is not restricted to short reads. PanGenie is alignment-free. Therefore, it expects unaligned reads in FASTA or FASTQ format.
+
+Reference genome
+================
+
+PanGenie also needs to be provided with the reference genome corresponding to the pangenome VCF. This file is expected to be in FASTA format.
 
 
 Pangenome reference
 ====================
-PanGenie works with a directed and acyclic pangenome reference. It expects the pangenome graph to be represented in terms of a VCF file with the properties listed above. If you are not familiar with the VCF format, we refer you to the VCF specifications: https://samtools.github.io/hts-specs/VCFv4.2.pdf
+
+PanGenie works with a directed and acyclic pangenome reference. It expects the pangenome graph to be represented in terms of a VCF file with the properties listed above. If you are not familiar with the VCF format, we refer you to the VCF specifications: https://samtools.github.io/hts-specs/VCFv4.2.pdf.
+
 
 * **multi-sample**: The VCF file must contain haplotype information of at least one known sample, as PanGenie makes use of the haplotype information inherent in the pangenome reference.
 
@@ -27,22 +34,36 @@ PanGenie works with a directed and acyclic pangenome reference. It expects the p
 * **sequence-resolved**: The REF and ALT sequences need to be explicitly provided (i.e. symbolic records are not allowed.)
 
 
-Note especially the third point listed above. Below, we illustrate how PanGenie expects overlapping variant alleles to be represented in terms of a graph.
+Any VCF with the properties listed above can be used as input to PanGenie. In this workshop however, we will especially focus on VCFs with additional annotations with allow to convert the genotypes PanGenie computes for all bubbles to genotypes for all variants nested inside of bubbles in the graph (bubble decomposition). Again, these annotations are not mandatory for running PanGenie, but they are useful for downstream analyses. For this workshop, we will not focus on how to create such annotated VCFs and refer the reader to XXX.
 
-.. image:: _static/input-representation.png
+In the following section, we will explain how such annotated VCFs encode pangenome bubbles and their nested variation.
+
+
+
+----------------------------------------------------
+Representing nested variation
+----------------------------------------------------
+
+Pangenome graph construction tools like the Minigraph-Cactus pipeline build pangenomes from haplotype-resolved de novo assemblies. Variation between haplotypes is represented in terms of bubble structures in the graph. Each haplotype is additionally stored as a path through the graph. In the example shown below, the graph represents four haplotypes (shown in pink, orange, green and blue) and two top-level bubble structures. 
+
+.. image:: _static/pangenome.png
+    :width: 600
+
+In VCF representation, each top-level bubble is encoded as a separate record. Each path through the bubble which is covered by at least one haplotype is listed as an alternative allele. The reference allele refers to the path the reference genome follows through the graph. The haplotypes are encoded in terms of phased genotypes in the sample columns of the VCF.
+
+.. image:: _static/vcf-record.png
+    :width: 600
+
+We show how to represent the records in VCF format. The first bubble contains two nested SNP variants. We can assign a unique ID to each individual variant allele and encode nested variation in the INFO/ID field. This field has one entry for each alternative allele listed in the ALT column of the VCF. If the alternative allele contains nested variants, the IDs of these nested alleles are listed, separated by a colon. If there are no nested alleles, the ID field just contains a single ID. See the Figure below for an example. The first bubble record consists of two alternative alleles. The first ALT allele corresponds to the path of the orange haplotype and thus traverses the two nested SNP variants. Therefore, its INFO/ID field lists the IDs of these two SNPs, separated by a colon. The second alternative allele refers to the deletion (the path taken by the blue and green haplotypes) and does not contain any further nested alleles. Therefore, the INFO/ID column just consists of a single ID, corresponding to the deletion itself.
+
+.. image:: _static/vcf-multi.png
+    :width: 600
+
+Instead of representing each bubble as a record in the VCF, an alternative is to convert the VCF into a bi-allelic representation which contains a separate record for each individual (nested) allele, i.e. one record per unique ID. See below for the bi-allelic representation of the above VCF records. Each individual ID is listed as a separate record with its corresponding REF and ALT sequences. The bubble genotypes are translated into bi-allelic genotypes encoding the presence (1) and absence (0) of each individual variant ID in the haplotypes.
+
+
+.. image:: _static/vcf-bi.png
     :width: 600
 
 
-In the following sections, we will explain in detail how to produce such input VCFs starting either from phased assemblies or from a pangenome graph generated with the Minigraph-Cactus pipeline. However, in general any VCF with the properties listed above can be used as input to PanGenie.
 
-Reference genome
-================
-
-PanGenie also needs to be provided with the reference genome corresponding to the pangenome VCF. This file is expected to be in FASTA format.
-
-
-----------------------------------
-Constructing PanGenie input VCFs
-----------------------------------
-
-TODO
