@@ -2,7 +2,7 @@
 Exercises
 =================
 
-Prior to this workshop, make sure that you have read about pangenome representations required by PanGenie (see `Background <https://pangenie-workshop.readthedocs.io/en/latest/background.html>`_. In the following, we will assume that you are familiar with the *bubble VCF* and the *callset VCF* that can be used with PanGenie to genotype and decompose bubbles.
+Prior to this workshop, make sure that you have read about pangenome representations required by PanGenie (see `Background <https://pangenie-workshop.readthedocs.io/en/latest/background.html>`_). In the following, we will assume that you are familiar with the *bubble VCF* and the *callset VCF* that can be used with PanGenie to genotype and decompose bubbles.
 
 
 0. Preparation
@@ -23,7 +23,7 @@ Tasks
 ==============================
 
 First, we are going to familiarize ourselves with the data files.
-**Note:** the commandline tool `bcftools` can be useful here, especially subcommands like `view` or `query`.
+**Note:** the commandline tool `bcftools <https://samtools.github.io/bcftools/bcftools.html>`_ can be useful here, especially subcommands like `view` or `query`.
 
 Tasks
 ------
@@ -50,7 +50,7 @@ Our dataset contains read data for three human individuals: NA19191,NA19189 and 
 3. Analyzing the genotypes
 ===========================
 
-The three individuals that we genotyped are related: NA19191 is the child of NA19189 (father) and NA19190 (mother). In this section we will analyze the genotypes further. One particularly interesting variant is *chr5-50300172-INS->157412165>157412166>157412167-186*. This variant is located in an ENCODE enhancer for B cell lymphomas and is associated with reduced expression of the immunoglobulin superfamily gene embigin (EMB), as reported by the `HGSVC <https://www.science.org/doi/10.1126/science.abf7117>`_ 
+The three individuals that we genotyped are related: NA19191 is the child of NA19189 (father) and NA19190 (mother). In this section we will analyze the genotypes further. One particularly interesting variant is *chr5-50300172-INS->157412165>157412166>157412167-186*. This variant is located in an ENCODE enhancer for B cell lymphomas and is associated with reduced expression of the immunoglobulin superfamily gene embigin (EMB), as reported by the `HGSVC <https://www.science.org/doi/10.1126/science.abf7117>`_.
 
 | 3.1. Check the genotypes of variant *chr5-50300172-INS->157412165>157412166>157412167-186* reported for all three individuals with PanGenie. From which parent was the variant inherited to the child?
 | 3.2. Check the mendelian consistency for all variants (hint: you can use the command `bcftools +mendelian2`). How many variants are mendelian consistent? How many mendelian errors are there?
