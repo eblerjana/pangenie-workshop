@@ -1,8 +1,9 @@
 =================
-PanGenie Workshop
+Exercises
 =================
 
-Prior to this workshop, make sure that you have read about pangenome representations required by PanGenie (XXX). In the following, we will assume that you are familiar with the "bubble" and "callset" VCF formats that can be used with PanGenie in order to decompose bubble genotypes.
+Prior to this workshop, make sure that you have read about pangenome representations required by PanGenie (see `Background <https://pangenie-workshop.readthedocs.io/en/latest/background.html>`_. In the following, we will assume that you are familiar with the *bubble VCF* and the *callset VCF* that can be used with PanGenie to genotype and decompose bubbles.
+
 
 0. Preparation
 ===============
@@ -21,7 +22,8 @@ Tasks
 1. Inspecting the input data
 ==============================
 
-Familiarize yourself with the data files. Note: the commandline tool `bcftools` can be useful here, especially subcommands like `view` or `query`.
+First, we are going to familiarize ourselves with the data files.
+**Note:** the commandline tool `bcftools` can be useful here, especially subcommands like `view` or `query`.
 
 Tasks
 ------
@@ -50,5 +52,6 @@ Our dataset contains read data for three individuals: XXX, XXX and XXX. We now w
 
 The three samples that we genotyped are related: XXX and XXX are the parents of XXX. In this section we will analyze the samples genotypes further. One particularly interesting variant is XXX. This variant has previously been associated with XXX. 
 
-| 3.1. Check the sample's genotypes for variant XXX. From which parent was it inherited to the child?
-| 3.2. Check the mendelian consistency for all variants (hint: you can use `bcftools`).
+| 3.1. How many variants have at least one missing genotype in any of the three samples?
+| 3.2. Check the sample's genotypes for variant XXX. From which parent was it inherited to the child?
+| 3.3. Check the mendelian consistency for all variants (hint: you can use the command `bcftools +mendelian2`). How many variants are mendelian consistent? How many mendelian errors are there?
