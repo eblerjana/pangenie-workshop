@@ -1,0 +1,9 @@
+
+region: "chr5:50200000-50400000"
+reference: "/gpfs/project/projects/medbioinf/users/ebler/pangenomics-workshop-naples/data/hg38.no_alt.fa.gz"
+panel_multi: "/gpfs/project/projects/medbioinf/users/ebler/pangenomics-workshop-naples/data/hprc-v2.0-mc-grch38.pgin.vcf.gz"
+panel_bi: "/gpfs/project/projects/medbioinf/users/ebler/pangenomics-workshop-naples/data/hprc-v2.0-mc-grch38.pgbi.vcf.gz"
+reads:
+        NA19191: "/gpfs/project/projects/medbioinf/data/illumina_nygc/output/interleaved/PRJEB36890.698/NA19191_ERR3989398.fasta.gz"
+        NA19189: "/gpfs/project/projects/medbioinf/data/illumina_nygc/output/interleaved/PRJEB31736.2504/NA19189_ERR3239631.fasta.gz"
+        NA19190: "/gpfs/project/projects/medbioinf/data/illumina_nygc/output/interleaved/PRJEB31736.2504/NA19190_ERR3239444.fasta.gz"

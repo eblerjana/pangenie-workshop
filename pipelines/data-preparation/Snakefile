@@ -1,0 +1,101 @@
+configfile: "config.yaml"
+
+REFERENCE = config["reference"]
+PANEL_MULTI = config["panel_multi"]
+PANEL_BI = config["panel_bi"]
+REGION = config["region"]
+FASTA_REGION = REGION.split(':')[0] + ":" + str(int(REGION.split(':')[1].split('-')[0]) + 1) + "-" + str(int(REGION.split(':')[1].split('-')[1]) + 1)
+READS = config["reads"]
+
+rule all:
+	input:
+		expand("{results}/{sample}_{region}.fasta", results = "results", sample = READS.keys(), region = REGION),
+		expand("{results}/panel_{version}_{region}.vcf", results = "results", sample = READS.keys(), version = ["multi", "bi"], region = REGION),
+		expand("{results}/reference_{region}.fasta", results = "results", sample = READS.keys(), region = REGION)
+	
+
+
+rule align_illumina_reads:
+	"""
+	Align Illumina reads to reference genome.
+	"""
+	input:
+		reads = lambda wildcards: READS[wildcards.sample],
+		reference = REFERENCE
+	output:
+		"{results}/{sample}.bam"
+	threads:
+		24
+	resources:
+		mem_mb = 90000,
+		walltime = "06:00:00"
+	log:
+		align = "{results}/{sample}_align.log",
+		sam = "{results}/{sample}_sam.log"
+	conda:
+		"envs/bwa.yaml"
+	params:
+		sam_threads = 10
+	shell:
+		" strobealign -t {threads} {input.reference} --interleaved {input.reads} 2> {log.align} "
+		" | "
+		" samtools sort --threads {params.sam_threads} -T {wildcards.sample}_strobe -o {output} 2> {log.sam}  "
+		" && " 
+		" samtools index --threads {threads} {output}"
+
+
+
+rule extract_reads_in_region:
+	"""
+	Extract reads aligning into region of interest
+	"""
+	input:
+		"{results}/{sample}.bam"
+	output:
+		"{results}/{sample}_{region}.fasta"
+	conda:
+		"envs/bwa.yaml"
+	shell:
+		"""
+		samtools view -h {input} {REGION} | samtools fasta - > {output}
+		"""
+	
+
+
+rule extract_variants_in_region:
+	"""
+	Extract variants from panel VCFs in region of
+	interest.
+	Adjust coordinates to start from zero.
+	"""
+	input:
+		lambda wildcards: PANEL_MULTI if wildcards.version == "multi" else PANEL_BI
+	output:
+		vcf = "{results}/panel_{version}_{region}.vcf",
+		gz = "{results}/panel_{version}_{region}.vcf.gz"
+	conda:
+		"envs/bcftools.yaml"
+	shell:
+		"""
+		bcftools view  {input} {REGION} | python3 adjust_coordinates.py {REGION} > {output.vcf}
+		bgzip -c {output.vcf} > {output.gz}
+		tabix -p vcf {output.gz}
+		"""
+
+
+rule extract_reference_of_region:
+	"""
+	Extract reference sequence in region of interest.
+	Adjust header sequence.
+	"""
+	input:
+		REFERENCE
+	output:
+		"{results}/reference_{region}.fasta"
+	conda:
+		"envs/bwa.yaml"
+	shell:
+		"""
+		samtools faidx {input} {FASTA_REGION} | python3 remove-region.py > {output}
+		samtools faidx {output}
+		"""

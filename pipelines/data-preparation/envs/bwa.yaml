@@ -1,0 +1,5 @@
+name: strobealign
+dependencies:
+  - strobealign
+  - samtools
+  - bwa
