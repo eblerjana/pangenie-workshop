@@ -15,7 +15,7 @@ Tasks
 ------
 
 
-| 0.1 Download the data from: XXXX.    
+| 0.1 The data to be used in this workshop is provided `here <https://github.com/eblerjana/pangenie-workshop/tree/main/data>`_.    
 | 0.2 Create a folder called `data` and move the files to that folder.
 
 
@@ -36,7 +36,7 @@ Tasks
 2. Running PanGenie
 =====================
 
-Our dataset contains read data for three individuals: XXX, XXX and XXX. We now want to genotype all three of them using PanGenie. 
+Our dataset contains read data for three human individuals: NA19191,NA19189 and NA19190. We now want to genotype all three of them using PanGenie. 
 
 **Note:** for this workshop, plese add commandline parameter `-e 100000` to all PanGenie commands to save RAM. Per default, PanGenie initializes space for a whole genome dataset, however, here, we are only dealing with a small test dataset. 
 
@@ -50,8 +50,7 @@ Our dataset contains read data for three individuals: XXX, XXX and XXX. We now w
 3. Analyzing the genotypes
 ===========================
 
-The three samples that we genotyped are related: XXX and XXX are the parents of XXX. In this section we will analyze the samples genotypes further. One particularly interesting variant is XXX. This variant has previously been associated with XXX. 
+The three individuals that we genotyped are related: NA19191 is the child of NA19189 (father) and NA19190 (mother). In this section we will analyze the genotypes further. One particularly interesting variant is *chr5-50300172-INS->157412165>157412166>157412167-186*. This variant is located in an ENCODE enhancer for B cell lymphomas and is associated with reduced expression of the immunoglobulin superfamily gene embigin (EMB), as reported by the `HGSVC <https://www.science.org/doi/10.1126/science.abf7117>`_ 
 
-| 3.1. How many variants have at least one missing genotype in any of the three samples?
-| 3.2. Check the sample's genotypes for variant XXX. From which parent was it inherited to the child?
-| 3.3. Check the mendelian consistency for all variants (hint: you can use the command `bcftools +mendelian2`). How many variants are mendelian consistent? How many mendelian errors are there?
+| 3.1. Check the genotypes of variant *chr5-50300172-INS->157412165>157412166>157412167-186* reported for all three individuals with PanGenie. From which parent was the variant inherited to the child?
+| 3.2. Check the mendelian consistency for all variants (hint: you can use the command `bcftools +mendelian2`). How many variants are mendelian consistent? How many mendelian errors are there?
