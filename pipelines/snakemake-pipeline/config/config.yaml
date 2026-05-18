@@ -1,0 +1,10 @@
+panel_multi: "/gpfs/project/projects/medbioinf/users/ebler/pangenomics-workshop-naples/data-preparation/results/panel_multi_chr5:50200000-50400000.vcf.gz"
+panel_bi: "/gpfs/project/projects/medbioinf/users/ebler/pangenomics-workshop-naples/data-preparation/results/panel_bi_chr5:50200000-50400000.vcf.gz"
+reference: "/gpfs/project/projects/medbioinf/users/ebler/pangenomics-workshop-naples/data-preparation/results/reference_chr5:50200000-50400000.fasta"
+reads:
+        NA19189: "/gpfs/project/projects/medbioinf/users/ebler/pangenomics-workshop-naples/data-preparation/results/NA19189_chr5:50200000-50400000.fasta"
+        NA19190: "/gpfs/project/projects/medbioinf/users/ebler/pangenomics-workshop-naples/data-preparation/results/NA19190_chr5:50200000-50400000.fasta"
+        NA19191: "/gpfs/project/projects/medbioinf/users/ebler/pangenomics-workshop-naples/data-preparation/results/NA19191_chr5:50200000-50400000.fasta"
+
+
+outname: "results"

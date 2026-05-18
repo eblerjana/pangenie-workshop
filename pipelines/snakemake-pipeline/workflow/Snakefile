@@ -1,0 +1,18 @@
+configfile: "config/config.yaml"
+
+PANEL_MULTI = config["panel_multi"] 
+PANEL_BI = config["panel_bi"]
+READS = config["reads"]
+REFERENCE = config["reference"]
+OUTNAME = config["outname"]
+SAMPLES = READS.keys()
+
+include: "rules/genotyping.smk"
+include: "rules/graph-stats.smk"
+
+rule all:
+	input:
+		expand("{results}/pangenie/{sample}_pangenie_bi_genotyping.vcf.gz", results = OUTNAME, sample = SAMPLES),
+		expand("{results}/pangenie/merged-genotypes_bi.vcf.gz", results = OUTNAME),
+
+		expand("{results}/graph-stats/graph-statistics.txt", results = OUTNAME)

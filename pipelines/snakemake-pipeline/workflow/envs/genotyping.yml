@@ -1,0 +1,5 @@
+name: genotyping
+dependencies:
+  - bcftools
+  - bedtools
+  - pangenie

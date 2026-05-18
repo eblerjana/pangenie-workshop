@@ -16,7 +16,7 @@ Tasks
 
 
 | 0.1 The data to be used in this workshop is provided `here <https://github.com/eblerjana/pangenie-workshop/tree/main/data>`_.    
-| 0.2 Create a folder called `data` and move the files to that folder.
+| 0.2 Inspect the files and determine which file corresponds to the *bubble VCF* and which one to the *callset VCF*.
 
 
 1. Inspecting the input data
@@ -44,7 +44,7 @@ Our dataset contains read data for three human individuals: NA19191,NA19189 and 
 | 2.2. Genotype all three samples using the created index and the sample' sequencing data. Make sure to store the log output of the PanGenie command.
 | 2.3. For all three samples, convert bubble genotypes to variant genotypes using the `convert-to-biallelic.py` script.
 | 2.4. Inspect the log output of the commands run in 2.2. Which average k-mer coverages were computed by PanGenie for the three samples?
-| 2.4. Combine the VCFs resulting from 2.3 into a single VCF using `bcftools merge`.
+| 2.5. Combine the VCFs resulting from 2.3 into a single VCF using `bcftools merge`.
 
 
 3. Analyzing the genotypes
