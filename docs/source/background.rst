@@ -50,7 +50,7 @@ Pangenome graph construction tools like the Minigraph-Cactus pipeline build pang
 .. image:: _static/pangenome.png
     :width: 600
 
-In VCF representation, each top-level bubble is encoded as a separate record. Each path through the bubble covered by at least one haplotype is listed as an alternative allele. The reference allele refers to the sequence of the path that the reference genome follows through the graph. The haplotypes are encoded in terms of phased genotypes in the sample columns of the VCF.
+In VCF representation, each top-level bubble is encoded as a separate record. Each path through the bubble covered by at least one haplotype is listed as an alternative allele. The reference allele refers to the sequence of the path that the reference genome follows through the graph and the position of the variant is also derived relative to the reference genome. The haplotypes are encoded in terms of phased genotypes in the sample columns of the VCF.
 
 .. image:: _static/vcf-record.png
     :width: 600
@@ -82,7 +82,7 @@ Genotyping with PanGenie
 
 The recommended way of running PanGenie is to first run a preprocessing step with ``PanGenie-index`` and then the genotyping step using the command ``PanGenie``::
 
-    PanGenie-index -v <variants.vcf> -r <reference.fa> -t <number of threads> -o <outfile-prefix>
+    PanGenie-index -v <bubbles.vcf> -r <reference.fa> -t <number of threads> -o <outfile-prefix>
     PanGenie -f <outfile-prefix>` -i <reads.fa/fq>  -s <sample-name> -j <nr threads kmer-counting> -t <nr threads genotyping>
 
 
@@ -95,7 +95,7 @@ Preprocessing step
 
 During preprocessing, steps unrelated to the genotyped sample(s) are performed, like processing the input variants and determining unique k-mers in the graph. In a setting in which the same set of input variants are genotyped across multiple samples, the advantage is that this preprocessing step needs to be run only once. The preprocessing step can be run using the command PanGenie-index::
 
- PanGenie-index -v <variants.vcf> -r <reference.fa> -t <number of threads> -o <outfile-prefix>
+ PanGenie-index -v <bubbles.vcf> -r <reference.fa> -t <number of threads> -o <outfile-prefix>
 
 
 The pre-proccessing step will result in a set of files (listed below) that can be used by PanGenie in order to genotype a specific sample:
@@ -129,7 +129,7 @@ For input VCFs containing annotations as described above, PanGenie is run using 
 Postprocessing can be run as:: 
 
 
-    cat pangenie_genotyping.vcf | python3 convert-to-biallelic.py <callset-VCF> > pangenie_genotyping_biallelic.vcf
+    cat pangenie_genotyping.vcf | python3 convert-to-biallelic.py <callset.vcf> > pangenie_genotyping_biallelic.vcf
 
 The script ``convert-to-biallelic.py`` is provided `here <https://github.com/eblerjana/pangenie/blob/master/pipelines/run-from-callset/scripts/convert-to-biallelic.py>`_.
 
