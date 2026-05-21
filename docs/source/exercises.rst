@@ -15,7 +15,7 @@ Tasks
 ------
 
 
-| **0.1** The data to be used in this workshop is provided `here <https://github.com/eblerjana/pangenie-workshop/tree/main/data>`_.    
+| **0.1** The data to be used in this workshop is provided `here <https://github.com/eblerjana/pangenie-workshop/tree/main/data>`_. Download these files.
 
 | **0.2** Inspect the files and determine which file corresponds to the *bubble VCF* and which one to the *callset VCF*.
 
@@ -41,7 +41,7 @@ Tasks
 
 Our dataset contains read data for three human individuals: NA19191,NA19189 and NA19190. We now want to genotype all three of them using PanGenie. 
 
-**Note:** for this workshop, please add commandline parameter `-e 100000` to all PanGenie commands to save RAM. Per default, PanGenie initializes space for a whole genome dataset, however, here, we are only dealing with a small test dataset. 
+**Note:** for this workshop, please add commandline parameter `-e 100000` to all PanGenie commands to save RAM. By default, PanGenie initializes space for a whole genome dataset, however, here, we are only dealing with a small test dataset and can thus reduce this space.
 
 
 Tasks

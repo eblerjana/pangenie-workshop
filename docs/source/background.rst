@@ -106,7 +106,7 @@ We will explain both commands in more detail in the following paragraphs.
 Preprocessing step
 ===================
 
-During preprocessing, steps unrelated to the genotyped sample(s) are performed, like processing the input variants and determining unique k-mers in the graph. In a setting in which the same set of input variants are genotyped across multiple samples, the advantage is that this preprocessing step needs to be run only once. The preprocessing step can be run using the command PanGenie-index::
+During preprocessing, steps unrelated to the genotyped sample(s) are performed, like processing the input variants and determining unique k-mers in the graph. In a setting in which the same set of input variants are genotyped across multiple samples, the advantage is that this preprocessing step needs to be run only once. The preprocessing step can be run using the command ``PanGenie-index``::
 
  PanGenie-index -v <bubbles.vcf> -r <reference.fa> -t <number of threads> -o <outfile-prefix>
 
@@ -129,7 +129,7 @@ After preprocessing is completed, the genotyping step can be run in order to gen
     PanGenie -f <outfile-prefix> -i <reads.fa/fq> -s <sample-name> -j <nr threads kmer-counting> -t <nr threads genotyping>
 
 
-The result will be a VCF file containing genotypes of the sample for the variants provided in the input VCF. Per default, the name of the output VCF is result_genotyping.vcf. You can specify the prefix of the output file using option ``-o <prefix>``, i.e. the output file will be named as ``<prefix>_genotyping.vcf`` . The full list of options is provided below.
+The result will be a VCF file containing genotypes of the sample for the variants provided in the input VCF. By default, the name of the output VCF is ``result_genotyping.vcf``. You can specify the prefix of the output file using option ``-o <prefix>``, i.e. the output file will be named as ``<prefix>_genotyping.vcf`` . The full list of options is provided below.
 
 If you want to genotype the same set of variants across more than one sample, run the command above separately on each sample. The preprocessing step only needs to be run once (as long as the VCF does not change).
 
@@ -142,7 +142,7 @@ For input VCFs containing annotations as described above, PanGenie is run using 
 Postprocessing can be run as::
 
 
-    cat pangenie_genotyping.vcf | python3 convert-to-biallelic.py <callset.vcf> > pangenie_genotyping_biallelic.vcf
+    cat <prefix>_genotyping.vcf | python3 convert-to-biallelic.py <callset.vcf> > pangenie_genotyping_biallelic.vcf
 
 The script ``convert-to-biallelic.py`` is provided `here <https://github.com/eblerjana/pangenie/blob/master/pipelines/run-from-callset/scripts/convert-to-biallelic.py>`_.
 
