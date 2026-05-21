@@ -7,7 +7,7 @@ Given a pangenome reference constructed from fully assembled haplotypes of a set
 Genotypes are computed based on read k-mer counts and the panel of haplotypes present in the graph.
 
 .. image:: _static/pangenie.png
-    :width: 600
+    :width: 650
 
 In this workshop, we will focus on how to run PanGenie rather than the underlying method. For a description of the method we refer to our publication: https://doi.org/10.1038/s41588-022-01043-w. PanGenie is available on github (https://github.com/eblerjana/pangenie). All information on how to install it is available there.
 
@@ -57,24 +57,24 @@ Representing nested variation
 Pangenome graph construction tools like the Minigraph-Cactus pipeline build pangenomes from haplotype-resolved de novo assemblies. Variation between haplotypes is represented in terms of bubble structures in the graph. Each haplotype is additionally stored as a path through the graph. In the example shown below, the graph represents four haplotypes (shown in pink, orange, green and blue) and two top-level bubble structures.
 
 .. image:: _static/pangenome.png
-    :width: 600
+    :width: 650
 
 In VCF representation, each top-level bubble is encoded as a separate record. Each path through the bubble covered by at least one haplotype is listed as an alternative allele. The reference allele refers to the sequence of the path that the reference genome follows through the graph and the position of the variant is also derived relative to the reference genome. The haplotypes are encoded in terms of phased genotypes in the sample columns of the VCF.
 
 .. image:: _static/vcf-record.png
-    :width: 600
+    :width: 650
 
 We show how to represent the records in VCF format. The first bubble contains two nested SNP variants. We can assign a unique ID to each individual variant allele and encode nested variation in the INFO/ID field. This field has one entry for each alternative allele listed in the ALT column of the VCF. If the alternative allele contains nested variants, the IDs of these nested alleles are listed, separated by a colon. If there are no nested alleles, the ID field just contains a single ID. See the Figure below for an example. The first bubble record consists of two alternative alleles. The first ALT allele corresponds to the path of the orange haplotype and thus traverses the two nested SNP variants. Therefore, its INFO/ID field lists the IDs of these two SNPs, separated by a colon. The second alternative allele refers to the deletion (the path taken by the blue and green haplotypes) and does not contain any further nested alleles. Therefore, the INFO/ID column just consists of a single ID, corresponding to the deletion itself.
 We refer to this annotated VCF as the **bubble VCF** in the following.
 
 .. image:: _static/vcf-multi.png
-    :width: 600
+    :width: 650
 
 Instead of representing each bubble as a record in the VCF, an alternative is to convert the VCF into a bi-allelic representation which lists a separate record for each individual (nested) allele, i.e. one record per unique ID. See below for the bi-allelic representation of the above VCF records. Each individual ID is listed as a separate record with its corresponding REF and ALT sequences. The bubble genotypes are translated into bi-allelic genotypes encoding the presence (1) and absence (0) of each individual variant ID in the haplotypes. We refer to this bi-allelic VCF as the **callset VCF** in the following.
 
 
 .. image:: _static/vcf-bi.png
-    :width: 600
+    :width: 650
 
 
 We can genotype bubbles in the pangenome graph with PanGenie using the annotated, multi-allelic *bubble VCF* as input. After genotyping, we can postprocess the VCF to convert bubble genotypes to genotypes for each individual variant allele represented in the *callset VCF*. We show an example below. With our given *bubble VCF*, PanGenie will compute a genotype for the target sample for each bubble record and output the results as a VCF (left panel of the Figure below). Based on our annotations, we can now easily translate the bubble genotypes into our *callset* representation, by checking absence and presence of each ID in the bubble genotypes (right panel of the Figure below).
