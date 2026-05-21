@@ -81,7 +81,7 @@ We can genotype bubbles in the pangenome graph with PanGenie using the annotated
 
 
 .. image:: _static/genotypes.png
-    :width: 600
+    :width: 700
 
 
 **Note:** these annotations are useful in many cases, but PanGenie can still be run on VCFs not containing them. In fact, the annotations are not used by PanGenie. They just enable an additional postprocessing step which helps analyzing variation encoded inside of bubbles and we will show how to do this below.
