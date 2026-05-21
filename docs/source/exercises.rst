@@ -43,6 +43,11 @@ Our dataset contains read data for three human individuals: NA19191,NA19189 and 
 
 **Note:** for this workshop, please add commandline parameter `-e 100000` to all PanGenie commands to save RAM. Per default, PanGenie initializes space for a whole genome dataset, however, here, we are only dealing with a small test dataset. 
 
+
+Tasks
+------
+
+
 | **2.1.** Create the PanGenie index structure for our dataset. Make sure which VCF file to use for this.
 
 | **2.2.** Genotype all three samples using the created index and the sample' sequencing data. Make sure to store the log output of the PanGenie command.
@@ -58,6 +63,11 @@ Our dataset contains read data for three human individuals: NA19191,NA19189 and 
 ===========================
 
 The three individuals that we genotyped are related: NA19191 is the child of NA19189 (father) and NA19190 (mother). In this section we will analyze the genotypes further. One particularly interesting variant is the one with ID *chr5-50300172-INS->157412165>157412166>157412167-186*. This variant is located in an ENCODE enhancer for B cell lymphomas and is associated with reduced expression of the immunoglobulin superfamily gene embigin (EMB), as reported by the `HGSVC <https://www.science.org/doi/10.1126/science.abf7117>`_.
+
+
+Tasks
+------
+
 
 | **3.1.** Check the genotypes of variant *chr5-50300172-INS->157412165>157412166>157412167-186* reported for all three individuals with PanGenie. From which parent was the variant inherited to the child?
 
