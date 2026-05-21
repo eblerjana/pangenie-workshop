@@ -80,7 +80,7 @@ Instead of representing each bubble as a record in the VCF, an alternative is to
 We can genotype bubbles in the pangenome graph with PanGenie using the annotated, multi-allelic *bubble VCF* as input. After genotyping, we can postprocess the VCF to convert bubble genotypes to genotypes for each individual variant allele represented in the *callset VCF*. We show an example below. With our given *bubble VCF*, PanGenie will compute a genotype for the target sample for each bubble record and output the results as a VCF (left panel of the Figure below). Based on our annotations, we can now easily translate the bubble genotypes into our *callset* representation, by checking absence and presence of each ID in the bubble genotypes (right panel of the Figure below).
 
 
-.. image:: _static/vcf-bi.png
+.. image:: _static/genotypes.png
     :width: 600
 
 
