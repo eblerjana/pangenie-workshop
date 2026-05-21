@@ -2,7 +2,15 @@
 Background
 ===========
 
-In this workshop we will learn how to work with PanGenie. PanGenie is a short-read genotyper for various types of genetic variants (such as SNPs, indels and structural variants) represented in a pangenome graph. Genotypes are computed based on read k-mer counts and a panel of known, fully assembled haplotypes present in the graph. Our focus will be on how to run PanGenie rather than the underlying method. For a description of the method we refer to our publication: https://doi.org/10.1038/s41588-022-01043-w. PanGenie is available on github (https://github.com/eblerjana/pangenie). All information on how to install it is available there.
+In this workshop we will learn how to work with PanGenie. PanGenie is a short-read genotyper for various types of genetic variants (such as SNPs, indels and structural variants) represented in a pangenome graph.
+Given a pangenome reference constructed from fully assembled haplotypes of a set of known samples, as well as short-read sequencing data of a target sample (not in the graph), PanGenie computes a genotype for each bubble in the graph.
+Genotypes are computed based on read k-mer counts and the panel of haplotypes present in the graph.
+
+.. image:: _static/pangenie.png
+    :width: 600
+
+In this workshop, we will focus on how to run PanGenie rather than the underlying method. For a description of the method we refer to our publication: https://doi.org/10.1038/s41588-022-01043-w. PanGenie is available on github (https://github.com/eblerjana/pangenie). All information on how to install it is available there.
+
 
 -----------
 Input data
@@ -22,7 +30,7 @@ PanGenie also needs to be provided with the reference genome corresponding to th
 Pangenome reference
 ====================
 
-PanGenie works with a directed and acyclic pangenome reference. It expects the pangenome graph to be represented in terms of a VCF file with the properties listed above. If you are not familiar with the VCF format, we refer you to the VCF specifications: https://samtools.github.io/hts-specs/VCFv4.2.pdf.
+PanGenie works with a directed and acyclic pangenome reference. It expects the pangenome graph to be represented in terms of a VCF file with the properties listed below. If you are not familiar with the VCF format, we refer you to the VCF specifications: https://samtools.github.io/hts-specs/VCFv4.2.pdf.
 
 
 * **multi-sample**: The VCF file must contain haplotype information of at least one known sample, as PanGenie makes use of the haplotype information inherent in the pangenome reference.
@@ -34,9 +42,10 @@ PanGenie works with a directed and acyclic pangenome reference. It expects the p
 * **sequence-resolved**: The REF and ALT sequences need to be explicitly provided (i.e. symbolic records are not allowed.)
 
 
-Any VCF with the properties listed above can be used as input to PanGenie. In this workshop however, we will especially focus on VCFs with additional annotations with allow to convert the genotypes PanGenie computes for all bubbles to genotypes for all variants nested inside of bubbles in the graph (bubble decomposition). Again, these annotations are not mandatory for running PanGenie, but they are useful for downstream analyses. For this workshop, we will not focus on how to create such annotated VCFs and refer the reader to the `PanGenie documentation <https://github.com/eblerjana/pangenie>`_.
+Any VCF with the properties listed above can be used as input to PanGenie. In this workshop however, we will especially focus on VCFs with additional annotations which allow to convert the genotypes PanGenie computes for all bubbles to genotypes for all variants nested inside of bubbles in the graph (bubble decomposition).
+Again, these annotations are not mandatory for running PanGenie, but they are useful for downstream analyses as bubbles can get very large and might contain many smaller nested variants. For this workshop, we will not focus on how to create such annotated VCFs and refer the reader to the `PanGenie documentation <https://github.com/eblerjana/pangenie>`_. We furthermore provide PanGenie-ready input VCFs for HGSVC and HPRC data there that can directly used with PanGenie.
 
- 
+
 In the following section, we will explain how such annotated VCFs encode pangenome bubbles and their nested variation.
 
 
@@ -45,7 +54,7 @@ In the following section, we will explain how such annotated VCFs encode pangeno
 Representing nested variation
 ----------------------------------------------------
 
-Pangenome graph construction tools like the Minigraph-Cactus pipeline build pangenomes from haplotype-resolved de novo assemblies. Variation between haplotypes is represented in terms of bubble structures in the graph. Each haplotype is additionally stored as a path through the graph. In the example shown below, the graph represents four haplotypes (shown in pink, orange, green and blue) and two top-level bubble structures. 
+Pangenome graph construction tools like the Minigraph-Cactus pipeline build pangenomes from haplotype-resolved de novo assemblies. Variation between haplotypes is represented in terms of bubble structures in the graph. Each haplotype is additionally stored as a path through the graph. In the example shown below, the graph represents four haplotypes (shown in pink, orange, green and blue) and two top-level bubble structures.
 
 .. image:: _static/pangenome.png
     :width: 600
@@ -61,14 +70,18 @@ We refer to this annotated VCF as the **bubble VCF** in the following.
 .. image:: _static/vcf-multi.png
     :width: 600
 
-Instead of representing each bubble as a record in the VCF, an alternative is to convert the VCF into a bi-allelic representation which contains a separate record for each individual (nested) allele, i.e. one record per unique ID. See below for the bi-allelic representation of the above VCF records. Each individual ID is listed as a separate record with its corresponding REF and ALT sequences. The bubble genotypes are translated into bi-allelic genotypes encoding the presence (1) and absence (0) of each individual variant ID in the haplotypes. We refer to this bi-allelic VCF as the **callset VCF** in the following.
+Instead of representing each bubble as a record in the VCF, an alternative is to convert the VCF into a bi-allelic representation which lists a separate record for each individual (nested) allele, i.e. one record per unique ID. See below for the bi-allelic representation of the above VCF records. Each individual ID is listed as a separate record with its corresponding REF and ALT sequences. The bubble genotypes are translated into bi-allelic genotypes encoding the presence (1) and absence (0) of each individual variant ID in the haplotypes. We refer to this bi-allelic VCF as the **callset VCF** in the following.
 
 
 .. image:: _static/vcf-bi.png
     :width: 600
 
 
-We can genotype bubbles in the pangenome graph with PanGenie using the annotated, multi-allelic *bubble VCF* as input. After genotyping, we can postprocess the VCF to convert bubble genotypes to genotypes for each individual variant allele represented in the *callset VCF*.
+We can genotype bubbles in the pangenome graph with PanGenie using the annotated, multi-allelic *bubble VCF* as input. After genotyping, we can postprocess the VCF to convert bubble genotypes to genotypes for each individual variant allele represented in the *callset VCF*. We show an example below. With our given *bubble VCF*, PanGenie will compute a genotype for the target sample for each bubble record and output the results as a VCF (left panel of the Figure below). Based on our annotations, we can now easily translate the bubble genotypes into our *callset* representation, by checking absence and presence of each ID in the bubble genotypes (right panel of the Figure below).
+
+
+.. image:: _static/vcf-bi.png
+    :width: 600
 
 
 **Note:** these annotations are useful in many cases, but PanGenie can still be run on VCFs not containing them. In fact, the annotations are not used by PanGenie. They just enable an additional postprocessing step which helps analyzing variation encoded inside of bubbles and we will show how to do this below.
@@ -121,12 +134,12 @@ The result will be a VCF file containing genotypes of the sample for the variant
 If you want to genotype the same set of variants across more than one sample, run the command above separately on each sample. The preprocessing step only needs to be run once (as long as the VCF does not change).
 
 
-Genotyping nested variation
-============================
+Converting bubble genotypes to variant genotypes
+=================================================
 
-For input VCFs containing annotations as described above, PanGenie is run using the same commands shown above. However, we can add an additional step after genotyping which converts the genotypes PanGenie computes for all bubbles in the graph to genotypes of all nested variant alleles represented in the bubbles. Note that this step only works if the VCF has these specific annotations explained above. 
+For input VCFs containing annotations as described above, PanGenie is run using the same commands shown above. However, we can add an additional step after genotyping which converts the genotypes PanGenie computes for all bubbles in the graph to genotypes of all nested variant alleles represented in the bubbles. Note that this step only works if the VCF has these specific annotations explained above.
 
-Postprocessing can be run as:: 
+Postprocessing can be run as::
 
 
     cat pangenie_genotyping.vcf | python3 convert-to-biallelic.py <callset.vcf> > pangenie_genotyping_biallelic.vcf
