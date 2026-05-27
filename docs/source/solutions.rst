@@ -15,7 +15,7 @@ Tasks
 ------
 
 
-| **0.2 Inspect the files and determine which file corresponds to the *bubble VCF* and which one to the *callset VCF*.**
+| **0.2 Inspect the files and determine which file corresponds to the bubble VCF and which one to the callset VCF.**
 
 - Bubble VCF: ``panel_multi_chr5:50200000-50400000.vcf.gz``
 - Callset VCF: ``panel_bi_chr5:50200000-50400000.vcf.gz``
