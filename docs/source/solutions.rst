@@ -91,7 +91,7 @@ Using the index previously computed, we can now genotype all three samples using
     PanGenie -f genotypes -i <(cat NA19190_chr5:50200000-50400000.fasta) -o NA19190_pangenie_multi -t 1 -j 1 -s NA19190 -e 100000 &> pangenie_NA19190.log
     PanGenie -f genotypes -i <(cat NA19191_chr5:50200000-50400000.fasta) -o NA19191_pangenie_multi -t 1 -j 1 -s NA19191 -e 100000 &> pangenie_NA19191.log
 
-Note: given that our dataset is very small, we can run PanGenie with a single thread (``-t 1`` and ``-j ``) and parameter ``-e 100000``. For a real, whole-genome data set (PanGenie's use case), remove the ``-e`` parameter and increase the number of threads if possible.
+Note: given that our dataset is very small, we can run PanGenie with a single thread (``-t 1`` and ``-j``) and parameter ``-e 100000``. For a real, whole-genome data set (PanGenie's use case), remove the ``-e`` parameter and increase the number of threads if possible.
 
 
 | **2.3. For all three samples, convert bubble genotypes to variant genotypes using the convert-to-biallelic.py script.**
