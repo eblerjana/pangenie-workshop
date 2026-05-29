@@ -2,3 +2,4 @@ name: bcftools
 dependencies:
   - bcftools
   - gsl=2.5
+  - samtools
