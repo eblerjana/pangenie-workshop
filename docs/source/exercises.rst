@@ -17,7 +17,6 @@ Tasks
 
 | **0.1** The data to be used in this workshop is provided `here <https://github.com/eblerjana/pangenie-workshop/tree/main/data>`_. Download these files.
 
-| **0.2** Inspect the files and determine which file corresponds to the *bubble VCF* and which one to the *callset VCF*.
 
 
 1. Inspecting the input data
@@ -29,11 +28,13 @@ First, we are going to familiarize ourselves with the data files.
 Tasks
 ------
 
-| **1.1.** How many bubbles are in the underlying pangenome graph?
+| **1.1** Inspect the files and determine which file corresponds to the *bubble VCF* and which one to the *callset VCF*.
 
-| **1.2.** How many variant alleles are in the pangenome? 
+| **1.2.** How many bubbles are in the underlying pangenome graph?
 
-| **1.3.** How many haplotype paths are in the pangenome graph?
+| **1.3.** How many variant alleles are in the pangenome?
+
+| **1.4.** How many haplotype paths are in the pangenome graph?
 
 
 2. Running PanGenie

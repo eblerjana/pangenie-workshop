@@ -5,25 +5,6 @@ Solutions
 Prior to this workshop, make sure that you have read about pangenome representations required by PanGenie (see `Background <https://pangenie-workshop.readthedocs.io/en/latest/background.html>`_). In the following, we will assume that you are familiar with the *bubble VCF* and the *callset VCF* that can be used with PanGenie to genotype and decompose bubbles.
 
 
-0. Preparation
-===============
-
-PanGenie is a tool build to run on a whole-genome dataset. In this workshop however, we will apply PanGenie to a small test dataset for demonstration purposes.
-The dataset contains real data, but is restricted to a small region of human chromosome 5.
-
-Tasks
-------
-
-
-| **0.2. Inspect the files and determine which file corresponds to the bubble VCF and which one to the callset VCF.**
-
-- Bubble VCF: ``panel_multi_chr5:50200000-50400000.vcf.gz``
-- Callset VCF: ``panel_bi_chr5:50200000-50400000.vcf.gz``
-- Reference genome: ``reference_chr5:50200000-50400000.fasta``
-- Reads:
-        - NA19189: ``NA19189_chr5:50200000-50400000.fasta``
-        - NA19190: ``NA19190_chr5:50200000-50400000.fasta``
-        - NA19191: ``NA19191_chr5:50200000-50400000.fasta``
 
 
 
@@ -38,7 +19,19 @@ First, we are going to familiarize ourselves with the data files.
 Tasks
 ------
 
-| **1.1. How many bubbles are in the underlying pangenome graph?**
+
+| **1.1. Inspect the files and determine which file corresponds to the bubble VCF and which one to the callset VCF.**
+
+- Bubble VCF: ``panel_multi_chr5:50200000-50400000.vcf.gz``
+- Callset VCF: ``panel_bi_chr5:50200000-50400000.vcf.gz``
+- Reference genome: ``reference_chr5:50200000-50400000.fasta``
+- Reads:
+        - NA19189: ``NA19189_chr5:50200000-50400000.fasta``
+        - NA19190: ``NA19190_chr5:50200000-50400000.fasta``
+        - NA19191: ``NA19191_chr5:50200000-50400000.fasta``
+
+
+| **1.2. How many bubbles are in the underlying pangenome graph?**
 
 We can determine the number of bubbles in the graph by simply counting the number of records in the *bubble VCF*, e.g. using this command::
 
@@ -48,8 +41,7 @@ which will tell us that the number of bubbles is: 3924.
 
 
 
-
-| **1.2. How many variant alleles are in the pangenome?**
+| **1.3. How many variant alleles are in the pangenome?**
 
 The number of variant alleles can be determined by counting the number of records in the *callset VCF*, using the same command as for 1.1::
 
@@ -58,7 +50,7 @@ The number of variant alleles can be determined by counting the number of record
 This returns: 5163.
 
 
-| **1.3. How many haplotype paths are in the pangenome graph?**
+| **1.4. How many haplotype paths are in the pangenome graph?**
 
 The number of haplotypes in the graph can be determined from the sample columns present in the *bubble* and *callset* VCFs (both contain the same samples). Since we are dealing with diploid samples, we can simply count the number of samples in the VCF and multiply the resulting number by two. One way to do this is by using the command:: 
     
