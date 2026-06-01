@@ -6,9 +6,6 @@ how to use it to genotype nested variants in pangenome graphs in `Background`. P
 
 This workshop was first held at the `EMBO Practical Course <https://meetings.embo.org/event/26-pangenomics>`_ on pangenomics.
 
-.. note::
-
-   This project is under active development.
 
 Contents
 --------
@@ -17,3 +14,4 @@ Contents
 
    background
    exercises
+   solutions
