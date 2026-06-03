@@ -34,7 +34,7 @@ Tasks
 
 | **1.3.** How many variant alleles are in the pangenome?
 
-| **1.4.** How many haplotype paths are in the pangenome graph?
+| **1.4.** Of how many haplotypes was the graph constructed, i.e. how many paths are stored in the graph?
 
 
 2. Running PanGenie
