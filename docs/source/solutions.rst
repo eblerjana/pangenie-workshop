@@ -83,13 +83,13 @@ Note: given that our dataset is very small, we can run PanGenie with a single th
 
 Using the *callset VCF* and the genotype VCFs we generated in the previous task for all three samples, we can convert the bubble genotypes to variant genotypes with the commands shown below::
 
-   cat NA19189_pangenie_multi_genotyping.vcf | python3 convert-to-biallelic.py panel_multi_chr5:50200000-50400000.vcf.gz | bgzip > NA19189_pangenie_bi_genotyping.vcf.gz
+   cat NA19189_pangenie_multi_genotyping.vcf | python3 convert-to-biallelic.py panel_bi_chr5:50200000-50400000.vcf.gz | bgzip > NA19189_pangenie_bi_genotyping.vcf.gz
    tabix -p vcf NA19189_pangenie_bi_genotyping.vcf.gz
 
-   cat NA19190_pangenie_multi_genotyping.vcf | python3 convert-to-biallelic.py panel_multi_chr5:50200000-50400000.vcf.gz | bgzip > NA19190_pangenie_bi_genotyping.vcf.gz
+   cat NA19190_pangenie_multi_genotyping.vcf | python3 convert-to-biallelic.py panel_bi_chr5:50200000-50400000.vcf.gz | bgzip > NA19190_pangenie_bi_genotyping.vcf.gz
    tabix -p vcf NA19190_pangenie_bi_genotyping.vcf.gz
 
-   cat NA19191_pangenie_multi_genotyping.vcf | python3 convert-to-biallelic.py panel_multi_chr5:50200000-50400000.vcf.gz | bgzip > NA19191_pangenie_bi_genotyping.vcf.gz
+   cat NA19191_pangenie_multi_genotyping.vcf | python3 convert-to-biallelic.py panel_bi_chr5:50200000-50400000.vcf.gz | bgzip > NA19191_pangenie_bi_genotyping.vcf.gz
    tabix -p vcf NA19191_pangenie_bi_genotyping.vcf.gz
 
 
