@@ -2,13 +2,6 @@
 Solutions
 =================
 
-Prior to this workshop, make sure that you have read about pangenome representations required by PanGenie (see `Background <https://pangenie-workshop.readthedocs.io/en/latest/background.html>`_). In the following, we will assume that you are familiar with the *bubble VCF* and the *callset VCF* that can be used with PanGenie to genotype and decompose bubbles.
-
-
-
-
-
-
 
 1. Inspecting the input data
 ==============================
@@ -64,7 +57,7 @@ The number of haplotype paths is: 462.
 
 Our dataset contains read data for three human individuals: NA19191,NA19189 and NA19190. We now want to genotype all three of them using PanGenie.
 
-**Note:** for this workshop, plese add commandline parameter `-e 100000` to all PanGenie commands to save RAM. Per default, PanGenie initializes space for a whole genome dataset, however, here, we are only dealing with a small test dataset.
+**Note:** for this workshop, please add commandline parameter `-e 100000` to all PanGenie commands to save RAM. Per default, PanGenie initializes space for a whole genome dataset, however, here, we are only dealing with a small test dataset.
 
 | **2.1. Create the PanGenie index structure for our dataset. Make sure which VCF file to use for this.**
 
@@ -79,9 +72,9 @@ Note: given that our dataset is very small, we can run PanGenie with a single th
 
 Using the index previously computed, we can now genotype all three samples using their respective read data with the commands below::
 
-    PanGenie -f genotypes -i <(cat NA19189_chr5:50200000-50400000.fasta) -o NA19189_pangenie_multi -t 1 -j 1 -s NA19189 -e 100000 &> pangenie_NA19189.log
-    PanGenie -f genotypes -i <(cat NA19190_chr5:50200000-50400000.fasta) -o NA19190_pangenie_multi -t 1 -j 1 -s NA19190 -e 100000 &> pangenie_NA19190.log
-    PanGenie -f genotypes -i <(cat NA19191_chr5:50200000-50400000.fasta) -o NA19191_pangenie_multi -t 1 -j 1 -s NA19191 -e 100000 &> pangenie_NA19191.log
+    PanGenie -f genotypes -i NA19189_chr5:50200000-50400000.fasta -o NA19189_pangenie_multi -t 1 -j 1 -s NA19189 -e 100000 &> pangenie_NA19189.log
+    PanGenie -f genotypes -i NA19190_chr5:50200000-50400000.fasta -o NA19190_pangenie_multi -t 1 -j 1 -s NA19190 -e 100000 &> pangenie_NA19190.log
+    PanGenie -f genotypes -i NA19191_chr5:50200000-50400000.fasta -o NA19191_pangenie_multi -t 1 -j 1 -s NA19191 -e 100000 &> pangenie_NA19191.log
 
 Note: given that our dataset is very small, we can run PanGenie with a single thread (``-t 1`` and ``-j``) and parameter ``-e 100000``. For a real, whole-genome data set (PanGenie's use case), remove the ``-e`` parameter and increase the number of threads if possible.
 

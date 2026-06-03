@@ -4,12 +4,12 @@ Background
 
 In this workshop we will learn how to work with PanGenie. PanGenie is a short-read genotyper for various types of genetic variants (such as SNPs, indels and structural variants) represented in a pangenome graph.
 Given a pangenome reference constructed from fully assembled haplotypes of a set of known samples, as well as short-read sequencing data of a target sample (not in the graph), PanGenie computes a genotype for each bubble in the graph.
-Genotypes are computed based on read k-mer counts and the panel of haplotypes present in the graph.
+Genotypes are computed based on read k-mer counts and the panel of haplotypes present in the graph. For each bubble, the output will be a pair of path fragments, representing the allelic sequences of the target sample in that region.
 
 .. image:: _static/pangenie.png
     :width: 650
 
-In this workshop, we will focus on how to run PanGenie rather than the underlying method. For a description of the method we refer to our publication: https://doi.org/10.1038/s41588-022-01043-w. PanGenie is available on github (https://github.com/eblerjana/pangenie). All information on how to install it is available there.
+In this workshop, we will focus on how to run PanGenie rather than the underlying method. For a description of the method we refer to our publication: https://doi.org/10.1038/s41588-022-01043-w. PanGenie is available on github (https://github.com/eblerjana/pangenie). We provide installation instructions and binaries for the latest release there.
 
 
 -----------
@@ -19,7 +19,7 @@ Input data
 Reads
 =====
 
-PanGenie relies on k-mer count information and thus requires accurate sequencing reads. Therefore, we strongly recommend to use it with short reads only, in principle however, it is not restricted to short reads. PanGenie is alignment-free. Therefore, it expects unaligned reads in FASTA or FASTQ format.
+PanGenie relies on k-mer count information and thus requires accurate sequencing reads. Therefore, we strongly recommend to use it with short reads only, in principle however, it is not restricted to short reads. PanGenie is alignment-free. Therefore, it expects unaligned reads in FASTA or FASTQ format. PanGenie is designed for whole genome genotyping and expects WGS sequencing data. 
 
 Reference genome
 ================
@@ -30,7 +30,7 @@ PanGenie also needs to be provided with the reference genome corresponding to th
 Pangenome reference
 ====================
 
-PanGenie works with a directed and acyclic pangenome reference. It expects the pangenome graph to be represented in terms of a VCF file with the properties listed below. If you are not familiar with the VCF format, we refer you to the VCF specifications: https://samtools.github.io/hts-specs/VCFv4.2.pdf.
+PanGenie works with a directed and acyclic pangenome reference. It expects the pangenome graph to be represented in terms of a VCF file with the properties listed below. If you are not familiar with the VCF format, we refer you to the VCF specifications: https://samtools.github.io/hts-specs/VCFv4.2.pdf. In this workshop, we will not focus on how to prepare PanGenie input VCFs, interested readers can find all information on this in the `PanGenie documentation <https://pangenie.readthedocs.io/en/latest/index.html>`_.
 
 
 * **multi-sample**: The VCF file must contain haplotype information of at least one known sample, as PanGenie makes use of the haplotype information inherent in the pangenome reference.
@@ -43,7 +43,7 @@ PanGenie works with a directed and acyclic pangenome reference. It expects the p
 
 
 Any VCF with the properties listed above can be used as input to PanGenie. In this workshop however, we will especially focus on VCFs with additional annotations which allow to convert the genotypes PanGenie computes for all bubbles to genotypes for all variants nested inside of bubbles in the graph (bubble decomposition).
-Again, these annotations are not mandatory for running PanGenie, but they are useful for downstream analyses as bubbles can get very large and might contain many smaller nested variants. For this workshop, we will not focus on how to create such annotated VCFs and refer the reader to the `PanGenie documentation <https://github.com/eblerjana/pangenie>`_. We furthermore provide PanGenie-ready input VCFs for HGSVC and HPRC data there that can directly used with PanGenie.
+Again, these annotations are not mandatory for running PanGenie, but they are useful for downstream analyses as bubbles can get very large and might contain many smaller nested variants. For this workshop, we will not focus on how to create such annotated VCFs and refer the reader to the `PanGenie documentation <https://pangenie.readthedocs.io/en/latest/index.html>`_. We furthermore provide PanGenie-ready input VCFs for HGSVC and HPRC data there that can directly used with PanGenie.
 
 
 In the following section, we will explain how such annotated VCFs encode pangenome bubbles and their nested variation.
@@ -96,7 +96,7 @@ Genotyping with PanGenie
 The recommended way of running PanGenie is to first run a preprocessing step with ``PanGenie-index`` and then the genotyping step using the command ``PanGenie``::
 
     PanGenie-index -v <bubbles.vcf> -r <reference.fa> -t <number of threads> -o <outfile-prefix>
-    PanGenie -f <outfile-prefix>` -i <reads.fa/fq>  -s <sample-name> -j <nr threads kmer-counting> -t <nr threads genotyping>
+    PanGenie -f <outfile-prefix> -i <reads.fa/fq>  -s <sample-name> -j <nr threads kmer-counting> -t <nr threads genotyping>
 
 
 
@@ -137,7 +137,7 @@ If you want to genotype the same set of variants across more than one sample, ru
 Converting bubble genotypes to variant genotypes
 =================================================
 
-For input VCFs containing annotations as described above, PanGenie is run using the same commands shown above. However, we can add an additional step after genotyping which converts the genotypes PanGenie computes for all bubbles in the graph to genotypes of all nested variant alleles represented in the bubbles. Note that this step only works if the VCF has these specific annotations explained above.
+For bubble VCFs containing annotations as described above, PanGenie is run using the same commands shown above. However, we can add an additional step after genotyping which converts the genotypes PanGenie computes for all bubbles in the graph to genotypes of all nested variant alleles represented in the bubbles. Note that this step only works if the VCF has these specific annotations explained above.
 
 Postprocessing can be run as::
 
