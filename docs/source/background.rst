@@ -108,7 +108,7 @@ Preprocessing step
 
 During preprocessing, steps unrelated to the genotyped sample(s) are performed, like processing the input variants and determining unique k-mers in the graph. In a setting in which the same set of input variants are genotyped across multiple samples, the advantage is that this preprocessing step needs to be run only once. The preprocessing step can be run using the command ``PanGenie-index``::
 
- PanGenie-index -v <bubbles.vcf> -r <reference.fa> -t <number of threads> -o <outfile-prefix>
+ PanGenie-index -v <bubbles.vcf> -r <reference.fa> -t <number of threads> -o <index-prefix>
 
 
 The pre-proccessing step will result in a set of files (listed below) that can be used by PanGenie in order to genotype a specific sample:
@@ -126,7 +126,7 @@ Genotyping step
 
 After preprocessing is completed, the genotyping step can be run in order to genotype a specific sample. If multiple samples shall be genotyped, this step needs to be run on each of these samples separately (while the preprocessing needs to be done only once). Based on the sequencing reads of a sample and the pre-computed files, genotyping is run using the command PanGenie with option ``-f``::
 
-    PanGenie -f <outfile-prefix> -i <reads.fa/fq> -s <sample-name> -j <nr threads kmer-counting> -t <nr threads genotyping>
+    PanGenie -f <index-prefix> -i <reads.fa/fq> -s <sample-name> -j <nr threads kmer-counting> -t <nr threads genotyping> -o <genotyping-prefix>
 
 
 The result will be a VCF file containing genotypes of the sample for the variants provided in the input VCF. By default, the name of the output VCF is ``result_genotyping.vcf``. You can specify the prefix of the output file using option ``-o <prefix>``, i.e. the output file will be named as ``<prefix>_genotyping.vcf`` . The full list of options is provided below.
@@ -142,7 +142,7 @@ For bubble VCFs containing annotations as described above, PanGenie is run using
 Postprocessing can be run as::
 
 
-    cat <prefix>_genotyping.vcf | python3 convert-to-biallelic.py <callset.vcf> > pangenie_genotyping_biallelic.vcf
+    cat <genotyping-prefix>_genotyping.vcf | python3 convert-to-biallelic.py <callset.vcf> > <genotyping-prefix>_genotyping_biallelic.vcf
 
 The script ``convert-to-biallelic.py`` is provided `here <https://github.com/eblerjana/pangenie/blob/master/pipelines/run-from-callset/scripts/convert-to-biallelic.py>`_.
 

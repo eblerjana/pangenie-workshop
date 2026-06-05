@@ -118,9 +118,9 @@ We can use the following command to combine all three output VCFs into a single 
 3. Analyzing the genotypes
 ===========================
 
-The three individuals that we genotyped are related: NA19191 is the child of NA19189 (father) and NA19190 (mother). In this section we will analyze the genotypes further. One particularly interesting variant is *chr5-50300172-INS->157412165>157412166>157412167-186*. This variant is located in an ENCODE enhancer for B cell lymphomas and is associated with reduced expression of the immunoglobulin superfamily gene embigin (EMB), as reported by the `HGSVC <https://www.science.org/doi/10.1126/science.abf7117>`_.
+The three individuals that we genotyped are related: NA19191 is the son of NA19189 (father) and NA19190 (mother). In this section we will analyze the genotypes further. One particularly interesting variant is *chr5-50300172-INS->157412165>157412166>157412167-186*. This variant is located in an ENCODE enhancer for B cell lymphomas and is associated with reduced expression of the immunoglobulin superfamily gene embigin (EMB), as reported by the `HGSVC <https://www.science.org/doi/10.1126/science.abf7117>`_.
 
-| **3.1. Check the genotypes of variant chr5-50300172-INS->157412165>157412166>157412167-186 reported for all three individuals with PanGenie. From which parent was the variant inherited to the child?**
+| **3.1. Check the genotypes of variant chr5-50300172-INS->157412165>157412166>157412167-186 reported for all three individuals with PanGenie. From which parent was the variant inherited to the son?**
 
 The variants in our VCFs are all assigned an ID in the INFO column of the VCF. All we need to do is to look for the ID in the VCF. The mother (NA19190) has genotype 1/1, the father (NA19189) has genotype 0/0 and the child is genotyped as 0/1. Therefore, the variant allele was inherited from the mother to the child.
 

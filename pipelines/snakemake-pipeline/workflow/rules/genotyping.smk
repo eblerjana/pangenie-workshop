@@ -1,24 +1,11 @@
 
-rule genotyping_pangenie_prepare_panel:
-	"""
-	Prepare (uncompressed) PanGenie input panel.
-	"""
-	input:
-		vcf = PANEL_MULTI
-	output:
-		temp("{results}/panel-multi.vcf")
-	shell:
-		"""
-		gunzip -c {input} > {output}
-		"""
-
 
 rule genotyping_pangenie_index:
 	"""
 	Create index for PanGenie.
 	"""
 	input:
-		vcf = "{results}/panel-multi.vcf",
+		vcf = PANEL_MULTI,
 		fasta = REFERENCE,
 	output:
 		directory("{results}/pangenie/index/")

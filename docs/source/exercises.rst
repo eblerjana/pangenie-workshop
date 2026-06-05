@@ -63,13 +63,13 @@ Tasks
 3. Analyzing the genotypes
 ===========================
 
-The three individuals that we genotyped are related: NA19191 is the child of NA19189 (father) and NA19190 (mother). In this section we will analyze the genotypes further. One particularly interesting variant is the one with ID *chr5-50300172-INS->157412165>157412166>157412167-186*. This variant is located in an ENCODE enhancer for B cell lymphomas and is associated with reduced expression of the immunoglobulin superfamily gene embigin (EMB), as reported by the `HGSVC <https://www.science.org/doi/10.1126/science.abf7117>`_.
+The three individuals that we genotyped are related: NA19191 is the son of NA19189 (father) and NA19190 (mother). In this section we will analyze the genotypes further. One particularly interesting variant is the one with ID *chr5-50300172-INS->157412165>157412166>157412167-186*. This variant is located in an ENCODE enhancer for B cell lymphomas and is associated with reduced expression of the immunoglobulin superfamily gene embigin (EMB), as reported by the `HGSVC <https://www.science.org/doi/10.1126/science.abf7117>`_.
 
 
 Tasks
 ------
 
 
-| **3.1.** Check the genotypes of variant *chr5-50300172-INS->157412165>157412166>157412167-186* reported for all three individuals with PanGenie. From which parent was the variant inherited to the child?
+| **3.1.** Check the genotypes of variant *chr5-50300172-INS->157412165>157412166>157412167-186* reported for all three individuals with PanGenie. From which parent was the variant inherited to the son?
 
 | **3.2.** Check the mendelian consistency for all variants (hint: you can use the command `bcftools +mendelian2`). How many variants are mendelian consistent? How many mendelian errors are there?
