@@ -15,7 +15,7 @@ Tasks
 ------
 
 
-| **0.1** The data to be used in this workshop is provided `here <https://github.com/eblerjana/pangenie-workshop/tree/main/data>`_. Download these files.
+| **0.1** The data files to be used in this workshop are provided in the EMBO-pangenomics-2026 git repository under `data/ <https://github.com/pangenome/embo-pangenomics-2026/tree/main/teaching/day6-jana-ebler/data>`_. Scripts and binaries for PanGenie are available in the same repository under `software/ <https://github.com/pangenome/embo-pangenomics-2026/tree/main/teaching/day6-jana-ebler/software>`_. After making the binaries executable with `chmod +x`, you can directly use PanGenie without installation.
 
 
 
