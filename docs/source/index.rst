@@ -15,3 +15,4 @@ Contents
 
    background
    exercises
+   solutions
